@@ -1,29 +1,10 @@
 package com.yakupcan.videogameapp.domain.model
 
 data class Game(
-    val id: Int,
-    val name: String,
-    val released: String,
-    val backgroundImage: String,
-    val rating: Double,
-    val ratingTop: Int,
-    val ratingsCount: Int,
-    val reviewsTextCount: Int,
-    val added: Int,
-    val addedByStatus: AddedByStatus,
-    val metacritic: Int,
-    val playtime: Int,
-    val suggestionsCount: Int,
-    val updated: String,
-    val userGame: String,
-    val reviewsCount: Int,
-    val saturatedColor: String,
-    val dominantColor: String,
-    val platforms: List<Platform>,
-    val parentPlatforms: List<ParentPlatform>,
-    val genres: List<Genre>,
-    val stores: List<Store>,
-    val clip: Clip,
-    val tags: List<Tag>,
-    val esrbRating: EsrbRating,
-    val shortScreenshots: List<ShortScreenshot>
+    val id: Int = 0,
+    val name: String = "",
+    val released: String = "",
+    val backgroundImage: String = "",
+    val rating: Double = 0.0,
+    val ratingTop: Int = 0
+)
