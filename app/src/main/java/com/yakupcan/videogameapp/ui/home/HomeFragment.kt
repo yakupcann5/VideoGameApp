@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.yakupcan.videogameapp.R
 import com.yakupcan.videogameapp.databinding.FragmentHomeBinding
+import com.yakupcan.videogameapp.domain.model.Game
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +17,7 @@ class HomeFragment() : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val TAG = "HomeFragment"
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var gameAdapter: HomeFragmentRecyclerViewAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -29,10 +32,25 @@ class HomeFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        deneme()
+        initRecyclerView()
     }
 
-    private fun deneme() {
+    private fun getGame() {
         viewModel.getGames()
+        val gameList = ArrayList<Game>()
+        viewModel.gameList.observe(viewLifecycleOwner) { list ->
+            list.forEach {
+                gameList.add(it)
+                gameAdapter.setList(gameList)
+            }
+        }
+    }
+
+    private fun initRecyclerView() {
+        gameAdapter = HomeFragmentRecyclerViewAdapter()
+        binding.homeRecycler.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        binding.homeRecycler.adapter = gameAdapter
+        getGame()
     }
 }

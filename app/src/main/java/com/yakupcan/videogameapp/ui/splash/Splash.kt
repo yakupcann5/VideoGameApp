@@ -1,4 +1,4 @@
-package com.yakupcan.videogameapp.ui
+package com.yakupcan.videogameapp.ui.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
