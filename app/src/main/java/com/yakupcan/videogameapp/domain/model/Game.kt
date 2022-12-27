@@ -7,4 +7,4 @@ data class Game(
     val backgroundImage: String = "",
     val rating: Double = 0.0,
     val ratingTop: Int = 0
-)
+) : java.io.Serializable

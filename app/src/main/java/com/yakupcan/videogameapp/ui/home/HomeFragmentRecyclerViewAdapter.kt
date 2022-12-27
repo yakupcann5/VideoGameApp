@@ -2,8 +2,11 @@ package com.yakupcan.videogameapp.ui.home
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.yakupcan.videogameapp.R
@@ -32,8 +35,13 @@ class HomeFragmentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHo
         (holder as ViewHolder).sentBinding.game = items[position]
         gameItemImg(holder, items[position].backgroundImage)
         holder.itemView.setOnClickListener {
-
+            openDetailPage(items[position].id, it)
         }
+    }
+
+    private fun openDetailPage(id: Int, it: View?) {
+        val bundle = bundleOf("setSelectedGame" to id)
+        Navigation.findNavController(it!!).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 
     private fun gameItemImg(
