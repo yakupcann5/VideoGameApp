@@ -2,4 +2,7 @@
     <string name="app_name">Video Game App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="metacritic_rate">Metacritic Rate:</string>
+    <string name="released_date">Released date:</string>
+    <string name="name_of_the_game">Name of the game:</string>
 </resources>

@@ -1,8 +1,9 @@
-package com.yakupcan.videogameapp.data
+package com.yakupcan.videogameapp.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.yakupcan.videogameapp.data.model.Results
 
-data class GameResponse(
+data class AllGameResponse(
     @SerializedName("count")
     var count: Int? = null,
     @SerializedName("next")

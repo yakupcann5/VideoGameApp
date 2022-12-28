@@ -1,7 +1,7 @@
 package com.yakupcan.videogameapp.domain.repository
 
-import com.yakupcan.videogameapp.data.Results
+import com.yakupcan.videogameapp.data.model.Results
 
-interface GameRepository {
+interface AllGameRepository {
     suspend fun getGames(apiKey: String): ArrayList<Results>
 }

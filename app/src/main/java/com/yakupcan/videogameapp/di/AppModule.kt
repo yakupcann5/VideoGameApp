@@ -1,9 +1,11 @@
 package com.yakupcan.videogameapp.di
 
 import com.yakupcan.videogameapp.common.Constants
-import com.yakupcan.videogameapp.data.RepositoryImpl
+import com.yakupcan.videogameapp.data.repository.AllGameRepositoryImpl
 import com.yakupcan.videogameapp.data.Service
-import com.yakupcan.videogameapp.domain.repository.GameRepository
+import com.yakupcan.videogameapp.data.repository.SingleGameRepositoryImpl
+import com.yakupcan.videogameapp.domain.repository.AllGameRepository
+import com.yakupcan.videogameapp.domain.repository.SingleGameRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +30,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun providerGameRepository(service: Service): GameRepository {
-        return RepositoryImpl(service)
+    fun providerGameRepository(service: Service): AllGameRepository {
+        return AllGameRepositoryImpl(service)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSingleGameRepository(service: Service): SingleGameRepository {
+        return SingleGameRepositoryImpl(service)
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yakupcan.videogameapp.R
+import com.yakupcan.videogameapp.common.Constants
 import com.yakupcan.videogameapp.databinding.FragmentHomeBinding
 import com.yakupcan.videogameapp.domain.model.Game
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,8 @@ class HomeFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.setCurrentFragment("home")
+        Constants.getBottomViewVisibility(true, requireActivity())
         initRecyclerView()
     }
 

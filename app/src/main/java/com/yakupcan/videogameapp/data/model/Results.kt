@@ -1,4 +1,4 @@
-package com.yakupcan.videogameapp.data
+package com.yakupcan.videogameapp.data.model
 
 import com.google.gson.annotations.SerializedName
 
