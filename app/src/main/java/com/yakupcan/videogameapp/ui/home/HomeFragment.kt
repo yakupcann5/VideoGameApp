@@ -11,7 +11,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.yakupcan.videogameapp.common.Constants
 import com.yakupcan.videogameapp.databinding.FragmentHomeBinding
 import com.yakupcan.videogameapp.domain.model.Game
-import com.yakupcan.videogameapp.domain.model.ViewPagerItem
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

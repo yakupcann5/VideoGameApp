@@ -1,6 +1,5 @@
 package com.yakupcan.videogameapp.ui.home
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,6 @@ import com.squareup.picasso.Picasso
 import com.yakupcan.videogameapp.R
 import com.yakupcan.videogameapp.databinding.HomePageViewPagerItemBinding
 import com.yakupcan.videogameapp.domain.model.Game
-import com.yakupcan.videogameapp.domain.model.ViewPagerItem
 
 class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
