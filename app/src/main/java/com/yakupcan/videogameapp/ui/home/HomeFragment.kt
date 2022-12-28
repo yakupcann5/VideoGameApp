@@ -69,18 +69,30 @@ class HomeFragment() : Fragment() {
         viewPagerAdapter = HomeFragmentViewPagerAdapter(
             listOf(
                 Game(
-                    viewPagerList[0].backgroundImage,
                     viewPagerList[0].id,
+                    viewPagerList[0].name,
+                    viewPagerList[0].released,
+                    viewPagerList[0].backgroundImage,
+                    viewPagerList[0].rating,
+                    viewPagerList[0].ratingTop,
                 ),
-                ViewPagerItem(
-                    viewPagerList[1].backgroundImage,
+                Game(
                     viewPagerList[1].id,
+                    viewPagerList[1].name,
+                    viewPagerList[1].released,
+                    viewPagerList[1].backgroundImage,
+                    viewPagerList[1].rating,
+                    viewPagerList[1].ratingTop,
                 ),
-                ViewPagerItem(
-                    viewPagerList[2].backgroundImage,
+                Game(
                     viewPagerList[2].id,
+                    viewPagerList[2].name,
+                    viewPagerList[2].released,
+                    viewPagerList[2].backgroundImage,
+                    viewPagerList[2].rating,
+                    viewPagerList[2].ratingTop,
                 )
-            ) as List<Game>
+            )
         )
         val viewPager = binding.viewPager
         viewPager.adapter = viewPagerAdapter

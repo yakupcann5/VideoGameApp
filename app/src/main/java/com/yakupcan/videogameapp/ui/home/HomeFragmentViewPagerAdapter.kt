@@ -33,7 +33,7 @@ class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) : RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).sentBinding.game = listOf[position]
-        gameItemImg(holder, listOf[position].backgroundImage)
+        Picasso.get().load(listOf[position].backgroundImage).into(holder.sentBinding.viewPagerItemImg)
         holder.itemView.setOnClickListener {
             openDetailPage(listOf[position].id, it)
         }
