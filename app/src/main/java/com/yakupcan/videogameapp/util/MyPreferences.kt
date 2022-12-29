@@ -27,4 +27,12 @@ class MyPreferences @Inject constructor(private val sharedPreferences: SharedPre
     fun setInt(tag: String, value: Int) {
         sharedPreferences.edit().putInt(tag, value).apply()
     }
+
+    fun getLong(tag: String, default: Long): Long {
+        return sharedPreferences.getLong(tag, default)
+    }
+
+    fun setLong(tag: String, value: Long) {
+        sharedPreferences.edit().putLong(tag, value).apply()
+    }
 }

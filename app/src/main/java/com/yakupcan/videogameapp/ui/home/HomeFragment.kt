@@ -40,7 +40,7 @@ class HomeFragment() : Fragment() {
     }
 
     private fun getGame() {
-        viewModel.getGames()
+        viewModel.refresh()
         val gameList = ArrayList<Game>()
         val viewPagerList = arrayListOf<Game>()
         viewModel.gameList.observe(viewLifecycleOwner) { list ->
