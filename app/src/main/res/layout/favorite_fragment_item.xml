@@ -4,10 +4,9 @@
     <data>
 
         <variable
-            name="game"
+            name="favGame"
             type="com.yakupcan.videogameapp.domain.model.Game" />
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -20,11 +19,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/home_recycler_view_item_image"
+                android:id="@+id/fav_recycler_view_item_image"
                 android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="15dp" />
+                android:layout_height="90dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                         android:id="@+id/fav_recycler_view_item_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{game.name}" />
+                        android:text="@{favGame.name}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -64,7 +63,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{game.rating}" />
+                            android:text="@{favGame.rating}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -79,10 +78,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{game.released}" />
+                            android:text="@{favGame.released}" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

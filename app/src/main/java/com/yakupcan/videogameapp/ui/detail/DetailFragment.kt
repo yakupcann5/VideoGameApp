@@ -45,6 +45,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
 
     private fun initView() {
         binding.detailFragmentFavButton.setOnClickListener(this)
+        binding.detailFragmentNotFavButton.setOnClickListener(this)
     }
 
     private fun getDataFromApi() {
@@ -66,8 +67,10 @@ class DetailFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.detail_fragment_fav_button -> {
-                val bundle = bundleOf()
-                findNavController().navigate(R.id.action_detailFragment_to_favoriteFragment)
+                viewModel.deneme(arguments?.getInt("setSelectedGame"))
+            }
+            R.id.detail_fragment_not_fav_button -> {
+                viewModel.deneme2(arguments?.getInt("setSelectedGame"))
             }
         }
     }

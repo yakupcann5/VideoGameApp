@@ -7,6 +7,7 @@ import com.yakupcan.videogameapp.data.repository.AllGameRepositoryImpl
 import com.yakupcan.videogameapp.data.Service
 import com.yakupcan.videogameapp.data.repository.SingleGameRepositoryImpl
 import com.yakupcan.videogameapp.db.Database
+import com.yakupcan.videogameapp.db.dao.FavGameDAO
 import com.yakupcan.videogameapp.db.dao.GameDAO
 import com.yakupcan.videogameapp.domain.repository.AllGameRepository
 import com.yakupcan.videogameapp.domain.repository.SingleGameRepository
@@ -55,5 +56,11 @@ object AppModule {
     @Provides
     fun provideRocketDao(database: Database): GameDAO {
         return database.getGameDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideFavoriteDao(database: Database): FavGameDAO {
+        return database.getFavGameDao()
     }
 }

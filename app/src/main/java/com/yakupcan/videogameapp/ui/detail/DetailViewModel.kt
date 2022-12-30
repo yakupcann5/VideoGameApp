@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yakupcan.videogameapp.common.RequestState
 import com.yakupcan.videogameapp.data.model.SingleGameResponse
+import com.yakupcan.videogameapp.db.Database
+import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
 import com.yakupcan.videogameapp.domain.model.SingleGame
 import com.yakupcan.videogameapp.domain.use_case.GetSingleGameUseCase
 import com.yakupcan.videogameapp.util.MyPreferences
@@ -13,12 +15,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val preferences: MyPreferences,
-    private val useCase: GetSingleGameUseCase
+    private val useCase: GetSingleGameUseCase,
+    private val database: Database
 ) : ViewModel() {
     private val TAG = "DetailViewModel"
     private val _singleGame = MutableStateFlow<RequestState<SingleGameResponse>?>(null)
@@ -38,5 +42,19 @@ class DetailViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun deneme(gameId: Int?) {
+        viewModelScope.launch {
+            database.getFavGameDao().insertFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
+            Log.d(TAG, "deneme: $gameId")
+        }
+    }
+
+    fun deneme2(gameId: Int?) {
+        viewModelScope.launch {
+            database.getFavGameDao().deleteFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
+            Log.d(TAG, "deneme: $gameId")
+        }
     }
 }

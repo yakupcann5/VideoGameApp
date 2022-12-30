@@ -57,7 +57,7 @@ class HomeViewModel @Inject constructor(
                             dto.name!!,
                             dto.released!!,
                             dto.backgroundImage!!,
-                            dto.rating!!,
+                            dto.rating!!.toString(),
                             dto.ratingTop!!
                         )
                     )
@@ -99,7 +99,7 @@ class HomeViewModel @Inject constructor(
                     dto.name,
                     dto.released,
                     dto.backgroundImage,
-                    dto.rating,
+                    dto.rating.toString(),
                     dto.ratingTop
                 )
             )
@@ -116,7 +116,7 @@ class HomeViewModel @Inject constructor(
                     dto.name,
                     dto.released,
                     dto.backgroundImage,
-                    dto.rating,
+                    dto.rating.toDouble(),
                     dto.ratingTop
                 )
             )

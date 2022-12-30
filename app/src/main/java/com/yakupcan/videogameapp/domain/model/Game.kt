@@ -5,6 +5,6 @@ data class Game(
     val name: String = "",
     val released: String = "",
     val backgroundImage: String = "",
-    val rating: Double = 0.0,
+    val rating: String = "",
     val ratingTop: Int = 0
 ) : java.io.Serializable

@@ -25,4 +25,7 @@ interface GameDAO {
 
     @Query("SELECT * FROM game WHERE name LIKE :searchQuery")
     suspend fun getContentsBySearchQuery(searchQuery: String): List<AllGameEntities>
+
+    @Query("SELECT * FROM game WHERE id = :id")
+    suspend fun getGameById(id: Int): AllGameEntities
 }

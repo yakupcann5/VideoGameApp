@@ -1,6 +1,7 @@
 package com.yakupcan.videogameapp.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
 
 class SingleGameResponse(
     @SerializedName("id")
@@ -33,4 +34,12 @@ class SingleGameResponse(
     var ratingTop: Int? = null,
     @SerializedName("description_raw")
     var descriptionRaw: String? = null
-)
+) {
+    fun toFavoriteGameEntities(gameId: Int?): FavoriteGameEntities {
+        return FavoriteGameEntities(
+            id = gameId!!,
+            time = System.currentTimeMillis(),
+            isFavorite = true
+        )
+    }
+}
