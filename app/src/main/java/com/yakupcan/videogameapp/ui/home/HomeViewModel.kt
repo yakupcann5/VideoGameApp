@@ -1,5 +1,7 @@
 package com.yakupcan.videogameapp.ui.home
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,16 +27,20 @@ class HomeViewModel @Inject constructor(
     private val database: Database
 ) : ViewModel() {
     private val TAG = "HomeViewModel"
+    var searchList = MutableLiveData<ArrayList<AllGameEntities>>()
     var gameList = MutableLiveData<ArrayList<Game>>()
     private val _game = MutableStateFlow<RequestState<ArrayList<Results>>?>(null)
     var game: StateFlow<RequestState<ArrayList<Results>>?> = _game
-    private var refreshTime = 10 * 60 * 1000 * 1000 * 1000L
+    private var refreshTime = 10 * 60 * 1000 * 1000L
 
 
     fun refresh() {
         val savedTime = preferences.getLong("time", 0)
         if (System.nanoTime() - savedTime < refreshTime) {
             getGamesFromDb()
+            if (gameList.value.isNullOrEmpty()) {
+                getGames()
+            }
         } else {
             getGames()
         }
@@ -59,6 +65,7 @@ class HomeViewModel @Inject constructor(
                 gameList.value = game
                 saveToDb(gameConvertEntities(game))
             }
+            Log.d(TAG, "getGames: from api")
         }.launchIn(viewModelScope)
     }
 
@@ -80,9 +87,10 @@ class HomeViewModel @Inject constructor(
             val games = database.getGameDao().getAllGame()
             gameList.value = entitiesConvertGame(games)
         }
+        Log.d(TAG, "getGamesFromDb: from db")
     }
 
-    private fun entitiesConvertGame(gamesList: List<AllGameEntities>): ArrayList<Game> {
+    fun entitiesConvertGame(gamesList: List<AllGameEntities>): ArrayList<Game> {
         val game = arrayListOf<Game>()
         gamesList.forEach { dto ->
             game.add(
@@ -118,5 +126,17 @@ class HomeViewModel @Inject constructor(
 
     fun setCurrentFragment(fragment: String) {
         preferences.setString("currentFragment", fragment)
+    }
+
+    fun getContentsFromDB(query: String) {
+        val searchQuery = "%$query%"
+        viewModelScope.launch {
+            val list = database.getGameDao().getContentsBySearchQuery(searchQuery)
+            if (list.isNotEmpty()) {
+                searchList.value = list as ArrayList<AllGameEntities>
+            } else {
+                searchList.value = arrayListOf()
+            }
+        }
     }
 }

@@ -22,4 +22,7 @@ interface GameDAO {
 
     @Query("DELETE FROM game WHERE id = :gameId")
     suspend fun deleteGame(gameId: Int)
+
+    @Query("SELECT * FROM game WHERE name LIKE :searchQuery")
+    suspend fun getContentsBySearchQuery(searchQuery: String): List<AllGameEntities>
 }
