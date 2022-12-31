@@ -16,14 +16,8 @@ interface GameDAO {
     @Query("DELETE FROM game")
     suspend fun deleteAllGame()
 
-    @Query("DELETE FROM game WHERE id = :gameId")
-    suspend fun deleteGame(gameId: Int)
-
     @Query("SELECT * FROM game WHERE name LIKE :searchQuery")
     suspend fun getContentsBySearchQuery(searchQuery: String): List<Game>
-
-    @Query("SELECT * FROM game WHERE id = :id")
-    suspend fun getGameById(id: Int): Game
 
     @Query("SELECT * FROM game WHERE id IN (:ids)")
     suspend fun getGameByIds(ids: List<Int>): List<Game>

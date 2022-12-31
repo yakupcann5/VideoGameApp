@@ -37,7 +37,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name: " />
+                        android:text="@string/name" />
 
                     <TextView
                         android:id="@+id/fav_recycler_view_item_title"
@@ -58,7 +58,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rating: " />
+                            android:text="@string/rating" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Released: " />
+                            android:text="@string/released" />
 
 
                         <TextView

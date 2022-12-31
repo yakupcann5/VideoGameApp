@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Video Game App</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="metacritic_rate">Metacritic Rate:</string>
-    <string name="released_date">Released date:</string>
-    <string name="name_of_the_game">Name of the game:</string>
+    <string name="metacritic_rate">Metacritic Rate: </string>
+    <string name="released_date">Released date: </string>
+    <string name="name_of_the_game">Name of the game: </string>
     <string name="not_result">Üzgünüz, aradığınız oyun bulunamadı!</string>
+    <string name="fav_button">Fav Button</string>
+    <string name="not_fav_button">Not Fav Button</string>
+    <string name="name">Name: </string>
+    <string name="rating">"Rating: "</string>
+    <string name="released">"Released: "</string>
+    <string name="description">"Description: "</string>
+    <string name="search_items">Search items...</string>
 </resources>

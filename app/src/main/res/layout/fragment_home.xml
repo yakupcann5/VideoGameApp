@@ -40,7 +40,8 @@
                 android:orientation="horizontal"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:baselineAligned="false">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/search_text"
@@ -48,7 +49,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:hint="Search items..."
+                    android:hint="@string/search_items"
                     android:textColorHint="@color/red"
                     app:boxCornerRadiusBottomEnd="25dp"
                     app:boxCornerRadiusBottomStart="25dp"

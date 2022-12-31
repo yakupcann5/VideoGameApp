@@ -12,7 +12,8 @@ import com.yakupcan.videogameapp.R
 import com.yakupcan.videogameapp.databinding.HomePageViewPagerItemBinding
 import com.yakupcan.videogameapp.domain.model.Game
 
-class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class ViewHolder(view: HomePageViewPagerItemBinding) : RecyclerView.ViewHolder(view.root) {
         val sentBinding: HomePageViewPagerItemBinding = view
@@ -31,7 +32,8 @@ class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) : RecyclerVie
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolder).sentBinding.game = listOf[position]
-        Picasso.get().load(listOf[position].backgroundImage).into(holder.sentBinding.viewPagerItemImg)
+        Picasso.get().load(listOf[position].backgroundImage)
+            .into(holder.sentBinding.viewPagerItemImg)
         holder.itemView.setOnClickListener {
             openDetailPage(listOf[position].id, it)
         }
@@ -39,7 +41,8 @@ class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) : RecyclerVie
 
     private fun openDetailPage(id: Int, it: View?) {
         val bundle = bundleOf("setSelectedGame" to id)
-        Navigation.findNavController(it!!).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+        Navigation.findNavController(it!!)
+            .navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 
     private fun gameItemImg(

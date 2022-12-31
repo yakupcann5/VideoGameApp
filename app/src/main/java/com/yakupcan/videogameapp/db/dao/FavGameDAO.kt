@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
-import org.jetbrains.annotations.NotNull
 
 @Dao
 interface FavGameDAO {
@@ -20,9 +19,6 @@ interface FavGameDAO {
 
     @Delete
     suspend fun deleteFavGame(vararg favGame: FavoriteGameEntities)
-
-    @Query("SELECT * FROM favGame WHERE isFavorite = :isFavorite")
-    suspend fun getFavGameByFavorite(isFavorite: Boolean): List<FavoriteGameEntities>
 
     @Query("SELECT * FROM favGame WHERE id = :id")
     suspend fun getFavGameById(id: Int): FavoriteGameEntities

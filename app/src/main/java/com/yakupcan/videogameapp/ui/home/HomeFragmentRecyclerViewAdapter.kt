@@ -41,7 +41,8 @@ class HomeFragmentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHo
 
     private fun openDetailPage(id: Int, it: View?) {
         val bundle = bundleOf("setSelectedGame" to id)
-        Navigation.findNavController(it!!).navigate(R.id.action_homeFragment_to_detailFragment, bundle)
+        Navigation.findNavController(it!!)
+            .navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 
     private fun gameItemImg(

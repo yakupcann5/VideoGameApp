@@ -116,7 +116,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Description: " />
+                            android:text="@string/description" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -127,25 +127,23 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/detail_fragment_fav_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/ic_round_favorite_border_24"
                     android:visibility="visible"
-                    android:text="Fav Button"
-                    app:layout_constraintRight_toLeftOf="@+id/detail_fragment_not_fav_button"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="@+id/detail_fragment_image_container"
+                    app:layout_constraintRight_toRightOf="parent" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/detail_fragment_not_fav_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/ic_round_favorite_24"
                     android:visibility="gone"
-                    android:layout_height="wrap_content"
-                    android:text="Not Fav Button"
-                    app:layout_constraintLeft_toRightOf="@+id/detail_fragment_fav_button"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="@+id/detail_fragment_image_container"
+                    app:layout_constraintRight_toRightOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

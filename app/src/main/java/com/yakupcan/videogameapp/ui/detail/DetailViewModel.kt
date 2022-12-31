@@ -69,7 +69,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             database.getFavGameDao()
                 .insertFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
-            Log.d(TAG, "deneme: $gameId")
+            Log.d(TAG, "addToFav: $gameId")
         }
     }
 
@@ -77,7 +77,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             database.getFavGameDao()
                 .deleteFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
-            Log.d(TAG, "deneme: $gameId")
+            Log.d(TAG, "deleteToFav: $gameId")
         }
     }
 }

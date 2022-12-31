@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    //c6c664fcb4414e2a951c2d445e348cc7
     private lateinit var binding: ActivityMainBinding
     private val viewModel: MainViewModel by viewModels()
 

@@ -5,7 +5,6 @@ import com.yakupcan.videogameapp.common.RequestState
 import com.yakupcan.videogameapp.data.model.toGame
 import com.yakupcan.videogameapp.domain.repository.AllGameRepository
 import kotlinx.coroutines.flow.flow
-import java.io.IOException
 import javax.inject.Inject
 
 class GetGameUseCase @Inject constructor(

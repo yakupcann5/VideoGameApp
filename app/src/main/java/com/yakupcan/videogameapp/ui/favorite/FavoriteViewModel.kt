@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yakupcan.videogameapp.common.RequestState
-import com.yakupcan.videogameapp.db.Database
 import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
 import com.yakupcan.videogameapp.domain.model.Game
 import com.yakupcan.videogameapp.domain.use_case.GetGameByIdUseCase
@@ -19,7 +18,6 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
     private val preferences: MyPreferences,
-    private val database: Database,
     private val favoriteUseCase: GetFavoriteUseCase,
     private val getGameByIdUseCase: GetGameByIdUseCase
 ) : ViewModel() {

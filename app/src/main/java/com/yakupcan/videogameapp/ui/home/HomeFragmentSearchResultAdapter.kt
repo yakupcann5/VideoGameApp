@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.yakupcan.videogameapp.R
 import com.yakupcan.videogameapp.databinding.HomePageSearchResultItemBinding
-import com.yakupcan.videogameapp.databinding.HomePageViewPagerItemBinding
 import com.yakupcan.videogameapp.domain.model.Game
 
 class HomeFragmentSearchResultAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val items: ArrayList<Game> = arrayListOf()
 
-    class ViewHolder(itemView: HomePageSearchResultItemBinding) : RecyclerView.ViewHolder(itemView.root) {
+    class ViewHolder(itemView: HomePageSearchResultItemBinding) :
+        RecyclerView.ViewHolder(itemView.root) {
         val sentBinding: HomePageSearchResultItemBinding = itemView
 
     }

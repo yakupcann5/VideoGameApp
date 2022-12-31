@@ -1,7 +1,6 @@
 package com.yakupcan.videogameapp.db.entities
 
 import androidx.room.Entity
-import com.yakupcan.videogameapp.domain.model.Game
 
 @Entity(tableName = "favGame", primaryKeys = ["id"])
 data class FavoriteGameEntities (

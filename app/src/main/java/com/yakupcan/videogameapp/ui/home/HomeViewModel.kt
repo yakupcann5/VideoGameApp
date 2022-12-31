@@ -1,17 +1,14 @@
 package com.yakupcan.videogameapp.ui.home
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yakupcan.videogameapp.common.RequestState
 import com.yakupcan.videogameapp.data.model.Results
 import com.yakupcan.videogameapp.db.Database
-import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
 import com.yakupcan.videogameapp.domain.model.Game
 import com.yakupcan.videogameapp.domain.use_case.GetAllGameUseCase
-import com.yakupcan.videogameapp.domain.use_case.GetGameByIdUseCase
 import com.yakupcan.videogameapp.domain.use_case.GetGameUseCase
 import com.yakupcan.videogameapp.domain.use_case.GetSearchGameUseCase
 import com.yakupcan.videogameapp.util.MyPreferences
@@ -29,7 +26,6 @@ class HomeViewModel @Inject constructor(
     private var getGameUseCase: GetGameUseCase,
     private val database: Database,
     private val getAllGameUseCase: GetAllGameUseCase,
-    private val getGameByIdUseCase: GetGameByIdUseCase,
     private val getSearchGameUseCase: GetSearchGameUseCase
 ) : ViewModel() {
     private val TAG = "HomeViewModel"
@@ -44,7 +40,7 @@ class HomeViewModel @Inject constructor(
         getGamesFromDb()
     }
 
-    fun getGames() {
+    private fun getGames() {
         getGameUseCase().onEach { result ->
             result.data?.let { it ->
                 gameList.value = it as ArrayList<Game>
