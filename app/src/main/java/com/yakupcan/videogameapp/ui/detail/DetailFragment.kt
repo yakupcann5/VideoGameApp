@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.yakupcan.videogameapp.R
-import com.yakupcan.videogameapp.common.Constants
 import com.yakupcan.videogameapp.databinding.FragmentDetailBinding
+import com.yakupcan.videogameapp.common.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

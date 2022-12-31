@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.yakupcan.videogameapp.common.Constants
 import com.yakupcan.videogameapp.databinding.FragmentFavoriteBinding
+import com.yakupcan.videogameapp.common.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

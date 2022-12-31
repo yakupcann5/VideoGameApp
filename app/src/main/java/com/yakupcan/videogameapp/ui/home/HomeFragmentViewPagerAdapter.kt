@@ -45,13 +45,6 @@ class HomeFragmentViewPagerAdapter(private val listOf: List<Game>) :
             .navigate(R.id.action_homeFragment_to_detailFragment, bundle)
     }
 
-    private fun gameItemImg(
-        holder: ViewHolder,
-        backgroundImage: String
-    ) {
-        Picasso.get().load(backgroundImage).into(holder.sentBinding.viewPagerItemImg)
-    }
-
     override fun getItemCount(): Int {
         return listOf.size
     }
