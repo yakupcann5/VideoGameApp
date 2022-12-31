@@ -7,8 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.yakupcan.videogameapp.common.RequestState
 import com.yakupcan.videogameapp.data.model.SingleGameResponse
 import com.yakupcan.videogameapp.db.Database
-import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
-import com.yakupcan.videogameapp.domain.model.SingleGame
+import com.yakupcan.videogameapp.domain.use_case.GetGameIsFavoriteUseCase
 import com.yakupcan.videogameapp.domain.use_case.GetSingleGameUseCase
 import com.yakupcan.videogameapp.util.MyPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,9 +21,11 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val preferences: MyPreferences,
     private val useCase: GetSingleGameUseCase,
-    private val database: Database
+    private val database: Database,
+    private val getGameIsFavoriteUseCase: GetGameIsFavoriteUseCase
 ) : ViewModel() {
     private val TAG = "DetailViewModel"
+    val gameIsFavorited = MutableLiveData<Boolean>()
     private val _singleGame = MutableStateFlow<RequestState<SingleGameResponse>?>(null)
     var singleGame: MutableStateFlow<RequestState<SingleGameResponse>?> = _singleGame
 
@@ -44,16 +45,38 @@ class DetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun deneme(gameId: Int?) {
+    fun gameIsFavorite(id: Int) {
+        getGameIsFavoriteUseCase.invoke(id).onEach { result ->
+            when (result) {
+                is RequestState.Success -> {
+                    if (result.data != null) {
+                        gameIsFavorited.value = true
+                    } else {
+                        gameIsFavorited.value = false
+                    }
+                }
+                is RequestState.Error -> {
+                    Log.d(TAG, "gameIsFavorite: ${result.exception}")
+                }
+                is RequestState.Loading -> {
+                    Log.d(TAG, "gameIsFavorite: Loading")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    fun addToFav(gameId: Int?) {
         viewModelScope.launch {
-            database.getFavGameDao().insertFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
+            database.getFavGameDao()
+                .insertFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
             Log.d(TAG, "deneme: $gameId")
         }
     }
 
-    fun deneme2(gameId: Int?) {
+    fun deleteToFav(gameId: Int?) {
         viewModelScope.launch {
-            database.getFavGameDao().deleteFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
+            database.getFavGameDao()
+                .deleteFavGame(singleGame.value?.data?.toFavoriteGameEntities(gameId)!!)
             Log.d(TAG, "deneme: $gameId")
         }
     }

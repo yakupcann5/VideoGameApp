@@ -38,6 +38,7 @@ class FavoriteFragment : Fragment() {
         viewModel.setCurrentFragment("fav")
         Constants.getBottomViewVisibility(true, requireActivity())
         initRecyclerView()
+        getFavoriteGames()
     }
 
     private fun initRecyclerView() {
@@ -45,7 +46,6 @@ class FavoriteFragment : Fragment() {
         binding.favoriteRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.favoriteRecyclerView.adapter = adapter
-        getFavoriteGames()
     }
 
     private fun getFavoriteGames() {

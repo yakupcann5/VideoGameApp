@@ -3,11 +3,9 @@ package com.yakupcan.videogameapp.ui.home
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +23,8 @@ class HomeFragment() : Fragment() {
     private lateinit var gameAdapter: HomeFragmentRecyclerViewAdapter
     private lateinit var viewPagerAdapter: HomeFragmentViewPagerAdapter
     private lateinit var searchResultAdapter: HomeFragmentSearchResultAdapter
+    var rootView: ViewGroup? = null
+    var isFirstLoad: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -34,25 +34,35 @@ class HomeFragment() : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater)
-        return binding.root
+        if (rootView == null) {
+            rootView = binding.root
+            isFirstLoad = true
+        } else {
+            isFirstLoad = false
+        }
+        return rootView!!
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.setCurrentFragment("home")
         Constants.getBottomViewVisibility(true, requireActivity())
-        initRecyclerView()
-        searchGame()
+        if (isFirstLoad) {
+            initView()
+            initRecyclerView()
+            getGame()
+        }
     }
 
-    private fun searchGame() {
+    private fun initView() {
         binding.searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun afterTextChanged(s: Editable?) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.isEmpty()) {
-                    gameAdapter.setList(arrayListOf())
-                    initRecyclerView()
+                    binding.viewPagerLinear.visibility = View.VISIBLE
+                    binding.homeRecyclerLinear.visibility = View.VISIBLE
+                    binding.searchResultsLinear.visibility = View.GONE
                 } else {
                     if (s.length > 2) {
                         viewModel.getContentsFromDB(s.toString())
@@ -65,18 +75,13 @@ class HomeFragment() : Fragment() {
 
     private fun getGame() {
         viewModel.refresh()
-        val gameList = ArrayList<Game>()
-        val viewPagerList = arrayListOf<Game>()
         viewModel.gameList.observe(viewLifecycleOwner) { list ->
-            list.forEach {
-                if (viewPagerList.size < 3) {
-                    viewPagerList.add(it)
-                } else {
-                    gameList.add(it)
-                }
+            if (list.size > 3) {
+                initViewPager(list.subList(0, 3).toCollection(ArrayList()))
+                gameAdapter.setList(list.subList(3, list.size).toCollection(ArrayList()))
+            } else {
+                initViewPager(list as ArrayList<Game>)
             }
-            gameAdapter.setList(gameList)
-            initViewPager(viewPagerList)
         }
     }
 
@@ -85,7 +90,6 @@ class HomeFragment() : Fragment() {
         binding.homeRecycler.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.homeRecycler.adapter = gameAdapter
-        getGame()
     }
 
     fun afterSearchinitRecyclerView() {
@@ -103,7 +107,7 @@ class HomeFragment() : Fragment() {
             } else {
                 binding.searchResultsLinear.visibility = View.VISIBLE
                 binding.noResultText.visibility = View.GONE
-                searchResultAdapter.setList(viewModel.entitiesConvertGame(list))
+                searchResultAdapter.setList(list)
             }
         }
     }

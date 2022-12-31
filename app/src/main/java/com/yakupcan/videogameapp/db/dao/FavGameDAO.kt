@@ -25,5 +25,5 @@ interface FavGameDAO {
     suspend fun getFavGameByFavorite(isFavorite: Boolean): List<FavoriteGameEntities>
 
     @Query("SELECT * FROM favGame WHERE id = :id")
-    suspend fun getFavGameById(id: Int): List<FavoriteGameEntities>
+    suspend fun getFavGameById(id: Int): FavoriteGameEntities
 }

@@ -1,7 +1,10 @@
 package com.yakupcan.videogameapp.domain.model
 
+import androidx.room.Entity
+
+@Entity(tableName = "game", primaryKeys = ["id"])
 data class Game(
-    val id: Int = 0,
+    var id: Int = 0,
     val name: String = "",
     val released: String = "",
     val backgroundImage: String = "",

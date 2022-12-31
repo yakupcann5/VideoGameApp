@@ -1,6 +1,7 @@
 package com.yakupcan.videogameapp.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.yakupcan.videogameapp.domain.model.Game
 
 data class Results(
     @SerializedName("id")
@@ -20,3 +21,13 @@ data class Results(
     @SerializedName("rating_top")
     var ratingTop: Int? = null
 )
+fun Results.toGame(): Game {
+    return Game(
+        id = id!!,
+        name = name!!,
+        released = released!!,
+        backgroundImage = backgroundImage!!,
+        rating = rating.toString(),
+        ratingTop = ratingTop!!
+    )
+}

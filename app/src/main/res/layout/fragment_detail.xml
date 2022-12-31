@@ -131,6 +131,7 @@
                     android:id="@+id/detail_fragment_fav_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="visible"
                     android:text="Fav Button"
                     app:layout_constraintRight_toLeftOf="@+id/detail_fragment_not_fav_button"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -139,6 +140,7 @@
                 <Button
                     android:id="@+id/detail_fragment_not_fav_button"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:text="Not Fav Button"
                     app:layout_constraintLeft_toRightOf="@+id/detail_fragment_fav_button"

@@ -6,16 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yakupcan.videogameapp.common.RequestState
 import com.yakupcan.videogameapp.db.Database
-import com.yakupcan.videogameapp.db.entities.AllGameEntities
 import com.yakupcan.videogameapp.db.entities.FavoriteGameEntities
 import com.yakupcan.videogameapp.domain.model.Game
-import com.yakupcan.videogameapp.domain.use_case.DenemeUseCase
+import com.yakupcan.videogameapp.domain.use_case.GetGameByIdUseCase
 import com.yakupcan.videogameapp.domain.use_case.GetFavoriteUseCase
 import com.yakupcan.videogameapp.util.MyPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +21,7 @@ class FavoriteViewModel @Inject constructor(
     private val preferences: MyPreferences,
     private val database: Database,
     private val favoriteUseCase: GetFavoriteUseCase,
-    private val denemeUseCase: DenemeUseCase
+    private val getGameByIdUseCase: GetGameByIdUseCase
 ) : ViewModel() {
     private val TAG = "FavoriteViewModel"
     val favGame = MutableLiveData<ArrayList<FavoriteGameEntities>>()
@@ -38,10 +36,7 @@ class FavoriteViewModel @Inject constructor(
         favoriteUseCase.invoke().onEach { result ->
             when (result) {
                 is RequestState.Success<*> -> {
-                    (result.data as ArrayList<FavoriteGameEntities>).forEach {
-                        getGameById(it.id)
-                        Log.d(TAG, "getFavoriteGames: ${it.id}")
-                    }
+                    result.data?.map { it.id }?.let { getGameById(it) }
                 }
                 is RequestState.Error -> {
                     Log.d(TAG, "getFavoriteGames: ${result.exception}")
@@ -53,12 +48,11 @@ class FavoriteViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    fun getGameById(id: Int) {
-        denemeUseCase.invoke(id).onEach { result ->
+    private fun getGameById(id: List<Int>) {
+        getGameByIdUseCase.invoke(id).onEach { result ->
             when (result) {
                 is RequestState.Success<*> -> {
-                    list.add(result.data as Game)
-                    allFavGame.postValue(list)
+                    allFavGame.value = result.data as ArrayList<Game>
                     Log.d(TAG, "getGameById: ${result.data}")
                 }
                 is RequestState.Error -> {

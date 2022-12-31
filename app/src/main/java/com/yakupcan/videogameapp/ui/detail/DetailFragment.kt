@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.yakupcan.videogameapp.R
@@ -46,6 +44,22 @@ class DetailFragment : Fragment(), View.OnClickListener {
     private fun initView() {
         binding.detailFragmentFavButton.setOnClickListener(this)
         binding.detailFragmentNotFavButton.setOnClickListener(this)
+        isGameFavorite(arguments?.getInt("setSelectedGame")!!)
+    }
+
+    private fun isGameFavorite(int: Int) {
+        lifecycleScope.launch {
+            viewModel.gameIsFavorite(int)
+            viewModel.gameIsFavorited.observe(viewLifecycleOwner) {
+                if (it) {
+                    binding.detailFragmentFavButton.visibility = View.GONE
+                    binding.detailFragmentNotFavButton.visibility = View.VISIBLE
+                } else {
+                    binding.detailFragmentFavButton.visibility = View.VISIBLE
+                    binding.detailFragmentNotFavButton.visibility = View.GONE
+                }
+            }
+        }
     }
 
     private fun getDataFromApi() {
@@ -67,10 +81,14 @@ class DetailFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.detail_fragment_fav_button -> {
-                viewModel.deneme(arguments?.getInt("setSelectedGame"))
+                viewModel.addToFav(arguments?.getInt("setSelectedGame"))
+                binding.detailFragmentFavButton.visibility = View.GONE
+                binding.detailFragmentNotFavButton.visibility = View.VISIBLE
             }
             R.id.detail_fragment_not_fav_button -> {
-                viewModel.deneme2(arguments?.getInt("setSelectedGame"))
+                viewModel.deleteToFav(arguments?.getInt("setSelectedGame"))
+                binding.detailFragmentFavButton.visibility = View.VISIBLE
+                binding.detailFragmentNotFavButton.visibility = View.GONE
             }
         }
     }

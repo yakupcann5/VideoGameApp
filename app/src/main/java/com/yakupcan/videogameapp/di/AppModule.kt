@@ -54,7 +54,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRocketDao(database: Database): GameDAO {
+    fun provideGameDao(database: Database): GameDAO {
         return database.getGameDao()
     }
 
